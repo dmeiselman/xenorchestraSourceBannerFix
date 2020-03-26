@@ -1,10 +1,11 @@
 # xenorchestraSourceBannerFix
 
-This script fixes the XOA warning banner added in v5.34
+This script fixes the XOA warning banner added in v5.44.1 - use at your own risk.
 
 
 ## Usage
-```
-sudo curl https://raw.githubusercontent.com/FoxieHazmat/xenorchestraSourceBannerFix/master/xenorchestraSourceBannerFix.sh | bash
-```
-##### This is currently only compatible with xo-web v5.34 Use at your own risk.
+- copy the script into the parent-folder of your xen-orchestra checkout
+- make it executable: ```chmod a+rx xenorchestraSourceBannerFix.sh```
+- run it as root ```./xenorchestraSourceBannerFix.sh```
+
+##### This is tested with XenOrchestra 5.44.1
