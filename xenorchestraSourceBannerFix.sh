@@ -60,7 +60,7 @@ main() {
         cd xen-orchestra
         yarn build
         cd -
-        systemctl stop xo-server
+        systemctl start xo-server
 
 }
 
