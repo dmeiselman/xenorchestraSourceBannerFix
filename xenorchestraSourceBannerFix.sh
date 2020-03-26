@@ -33,12 +33,35 @@ myinit() {
 }
 
 # 
-# remove the following code fragment
+# remove the following 2 code fragments
 #
+#   ...
+# 
 #   if (+process.env.XOA_PLAN === 5) {
 #     this.displayOpenSourceDisclaimer()
 #   }
 #
+#   ...
+#
+#    {plan === 'Community' && !this.state.dismissedSourceBanner && (
+#       <div className='alert alert-danger mb-0'>
+#         <a
+#           href='https://xen-orchestra.com/#!/xoa?pk_campaign=xo_source_banner'
+#           rel='noopener noreferrer'
+#           target='_blank'
+#         >
+#           {_('disclaimerText3')}
+#         </a>
+#         <button className='close' onClick={this.dismissSourceBanner}>
+#           &times;
+#         </button>
+#       </div>
+#      )}
+
+
+
+
+
 
 patch_file() {
 
@@ -47,6 +70,11 @@ patch_file() {
                 /\+process.env.XOA_PLAN[ \t]+=+[ \t]+5/         { start_patch=1 ; next }
                 /this\.displayOpenSourceDisclaimer/             { next }
                 start_patch == 1 && /\}/                        { start_patch=0 ; next }
+
+                /plan === .Community. /                         { start_patch2=1 ; next }
+                /this.dismissSourceBanner/                      { start_patch2=2 ; next }
+                start_patch2==2 && /\)\}/                       { start_patch2=0 ; next }
+                start_patch2>0                                  {next}
 
                 1
                 ' "$file.bak" >"$file"
