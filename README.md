@@ -4,14 +4,9 @@ This script fixes the XOA warning banner added in v5.44.1 - use at your own risk
 
 
 ## Usage
-- copy the script into the parent-folder of your xen-orchestra checkout
+- install or update with https://github.com/ronivay/XenOrchestraInstallerUpdater
+- check out this script, put it anywhere
 - make it executable: ```chmod a+rx xenorchestraSourceBannerFix.sh```
 - run it as root ```./xenorchestraSourceBannerFix.sh```
 
-This is tested with XenOrchestra 5.44.1
-
-## manual procedure
-
-if you like to do it manually, take the discription there:
-
-https://github.com/FoxieHazmat/xenorchestraSourceBannerFix/issues/1
+This is not tested.
