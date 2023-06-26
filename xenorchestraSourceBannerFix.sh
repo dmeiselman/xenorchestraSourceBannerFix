@@ -12,15 +12,16 @@
 
 myinit() {
 
-        if ! [ -d "xen-orchestra" ]; then
-
-                echo
-                echo "You are not in the parent directory of the xen-orchestra checkout"
-                echo "this script must be run from there"
-                echo
-                exit 1
-
-        fi
+# commented out this section about confirming you're in the right directory, cause our new version doesn't care.
+#        if ! [ -d "xo-web" ]; then
+#
+#                echo
+#                echo "You are not in the parent directory of the xo-web checkout"
+#                echo "this script must be run from there"
+#                echo
+#                exit 1
+#
+#        fi
 
         if ! [ -r "$file" ]; then
 
@@ -85,12 +86,15 @@ main() {
         myinit
         systemctl stop xo-server
         patch_file
-        cd xen-orchestra
+        cd $buildfolder
+        # this switches to the latest buildfolder, becuase xen-updater keeps 3 versions
+        cd  "$(\ls -1dt ./*xen*/ | head -n 1)"
+        yarn
         yarn build
-        cd -
         systemctl start xo-server
 
 }
-
-export file="xen-orchestra/packages/xo-web/src/xo-app/index.js"
+# We're changing this path to be more compliant with the way xen-orcehstra-installer-updater does versionining
+export file="/opt/xo/xo-web/src/xo-app/index.js"
+export buildfolder="/opt/xo/xo-builds/"
 main
